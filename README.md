@@ -1,2 +1,2 @@
 # php-oop-crud
-Login/Registration system with PHP OOP, PDO &amp; Bootstrap
+Login/Registration system with PHP OOP, PDO &amp; Bootstrap, AJAX
