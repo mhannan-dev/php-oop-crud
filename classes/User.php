@@ -1,7 +1,5 @@
 <?php
 
-use User as GlobalUser;
-
 class User{
         public function login()
         {
