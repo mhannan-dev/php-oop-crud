@@ -1,3 +1,24 @@
+<?php
+
+session_start();
+include_once 'class.user.php';
+$user = new User();
+$uid = $_SESSION['uid'];
+if (!$user->get_session()) {
+    header("location:login.php");
+}
+
+if (isset($_GET['q'])) {
+    $user->user_logout();
+    header("location:login.php");
+}
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,16 +29,9 @@
     <title>PHP oop login reg system</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- custome css -->
-
-
 </head>
 
 <body>
-
-
-
-
-
 
     <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,12 +42,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
-                    </li>
+
 
                     <li class="nav-item">
-                        <a class="nav-link" href="registration.php">Register</a>
+                        <h1>Hello <?php $user->get_fullname($uid); ?></h1>
+                        <a class="nav-link" href="home.php?q=logout">LOGOUT</a>
                     </li>
 
                 </ul>
@@ -46,21 +59,50 @@
 
 
 
-</body>
+    <div class=" card container-fluid">
+        <div class=" card-heading text-center">
+            <h2 class="mt-3"><strong>Welcome!</strong> Jahid</h2>
+        </div>
 
-<div class="container">
-    <div class="row text-center" style="max-width: 720px;height:70vh; margin:0 auto;">
-        <div class="alert alert-success">
-            <h1 >Welcome</h1>
+        <div class="card-body">
+            <table class="table table-striped">
 
-            <p style="text-align:justify; padding-top:25px;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident blanditiis atque fuga sunt accusantium nesciunt nemo odit minima recusandae corrupti eos tenetur impedit molestias necessitatibus iste enim tempore eaque natus ad veritatis, amet temporibus mollitia reiciendis debitis. Excepturi aperiam sed mollitia deleniti ad laboriosam eos modi quam suscipit dignissimos, ipsam et. Doloremque, dolorum libero natus magnam vero a! Quas, cum asperiores, iusto laboriosam nisi explicabo ducimus blanditiis eligendi provident alias impedit nostrum quae aspernatur, molestias eos odit libero possimus eaque placeat cupiditate facere? Iure, praesentium magnam? Nihil explicabo, est qui quas veniam eos natus, fugit minus quidem illum, sit vel.</p>
+                <tr>
+                    <th style="width:20%">Serial</th>
+                    <th style="width:20%">Name</th>
+                    <th style="width:20%">Username</th>
+                    <th style="width:20%">Email</th>
+                    <th style="width:20%">Action</th>
+                </tr>
+
+
+                <tr>
+                    <th scope="row">01</th>
+                    <td>Jahid Hasan</td>
+                    <td>shiplo</td>
+                    <td>shiplo@gmail.com</td>
+                    <td><a href="profile.php?id=1" class="btn btn-success">View</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">02</th>
+                    <td>Masum khan</td>
+                    <td>masum</td>
+                    <td>masum@gmail.com</td>
+                    <td><a href="profile.php?id=2" class="btn btn-success">View</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">03</th>
+                    <td>Shakil Hasan</td>
+                    <td>shakil</td>
+                    <td>shakil@gmail.com</td>
+                    <td><a href="profile.php?id=3" class="btn btn-success">View</a></td>
+                </tr>
+
+            </table>
         </div>
     </div>
-</div>
+</body>
 
-
-
-<!-- footer -->
 
 <footer class="bg-light text-center text-lg-start pt-5">
 

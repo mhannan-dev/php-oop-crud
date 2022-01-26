@@ -1,3 +1,24 @@
+<?php
+
+session_start();
+include_once 'class.user.php';
+$user = new User();
+
+if (isset($_REQUEST['submit'])) {
+    extract($_REQUEST);
+    $login = $user->check_login($emailusername, $password);
+    if ($login) {
+        // Registration Success
+        header("location:home.php");
+    } else {
+        // Registration Failed
+        echo 'Wrong username or password';
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,14 +30,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- custome css -->
 
+    <style>
+        #container {
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
 
+    <script type="text/javascript" language="javascript">
+        function submitlogin() {
+            var form = document.login;
+            if (form.emailusername.value == "") {
+                alert("Enter email or username.");
+                return false;
+            } else if (form.password.value == "") {
+                alert("Enter password.");
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body>
-
-
-
-
 
 
     <!-- nav bar -->
@@ -46,19 +81,39 @@
 
 
 
-</body>
+    <!-- login -->
 
-<div class="container">
-    <div class="row text-center" style="max-width: 720px;height:70vh; margin:0 auto;">
-        <div class="alert alert-success">
-            <h1 >Welcome</h1>
+    <div class="container">
+        <div class="row" style="max-width: 602px; margin: 0 auto;">
 
-            <p style="text-align:justify; padding-top:25px;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident blanditiis atque fuga sunt accusantium nesciunt nemo odit minima recusandae corrupti eos tenetur impedit molestias necessitatibus iste enim tempore eaque natus ad veritatis, amet temporibus mollitia reiciendis debitis. Excepturi aperiam sed mollitia deleniti ad laboriosam eos modi quam suscipit dignissimos, ipsam et. Doloremque, dolorum libero natus magnam vero a! Quas, cum asperiores, iusto laboriosam nisi explicabo ducimus blanditiis eligendi provident alias impedit nostrum quae aspernatur, molestias eos odit libero possimus eaque placeat cupiditate facere? Iure, praesentium magnam? Nihil explicabo, est qui quas veniam eos natus, fugit minus quidem illum, sit vel.</p>
+            <h1>Login</h1>
+            <form action="" method="post" name="login">
+                <div class="mb-2">
+                    <label for="emailusername" class="form-label">Username or Email</label>
+                    <input type="text" class="form-control" name="emailusername" placeholder="username or email" id="emailusername" aria-describedby="emailusername">
+                    <div id="emailusername" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" placeholder="password" name="password" id="Password">
+                </div>
+
+                <div class="mb-3">
+                    <input onclick="return(submitlogin());" type="submit" name="submit" value="login" class="btn btn-success "></input>
+                    <a href="#" class="float-end">Forgot password?</a>
+                </div>
+
+                <div class="mb-3">
+                    <a href="registration.php">Register new user</a>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 
 
+    <!-- end -->
+</body>
 
 <!-- footer -->
 
