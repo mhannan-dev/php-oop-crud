@@ -1,6 +1,6 @@
 <?php
 
-include "db_config.php";
+include './config/db_config.php';
 
 class User{
 
